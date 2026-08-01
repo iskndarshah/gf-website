@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Khas Untuk Ezatul — Dari Iskandar</title>
+    <title>Untuk Ezatul — Dari Iskandar</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         * {
@@ -341,7 +341,72 @@
         .time-number { font-size: 1.8rem; font-weight: 700; font-family: 'Playfair Display', serif; }
         .time-label { font-size: 0.75rem; opacity: 0.85; margin-top: 5px; text-transform: uppercase; }
 
-        /* ===== ANIMASI BUNGA MEKAR (PERFECT CENTER & MEKAR LUAS) ===== */
+        /* ===== REASONS WHY I LOVE YOU SECTION ===== */
+        .reasons-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,240,245,0.9));
+            border-radius: 30px;
+            padding: 40px 25px;
+            margin: 40px 20px;
+            border: 2px solid rgba(255, 182, 193, 0.7);
+            box-shadow: 0 15px 40px var(--shadow-pink);
+            text-align: center;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .reason-card {
+            background: white;
+            padding: 22px 18px;
+            border-radius: 20px;
+            border: 1px solid #ffe4e1;
+            box-shadow: 0 5px 20px rgba(194, 24, 88, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-50%) scale(1.03);
+            border-color: var(--rose-deep);
+        }
+
+        .reason-icon { font-size: 2.2rem; margin-bottom: 10px; }
+        .reason-title { font-weight: 700; color: var(--rose-deep); margin-bottom: 8px; font-size: 1.05rem; }
+        .reason-desc { font-size: 0.88rem; color: #6b3d4a; line-height: 1.6; }
+
+        /* ===== QUIZ SECTION ===== */
+        .quiz-section {
+            background: white;
+            border-radius: 30px;
+            padding: 40px 25px;
+            margin: 40px 20px;
+            box-shadow: 0 15px 40px var(--shadow-pink);
+            border: 2px solid #f8bbd0;
+            text-align: center;
+        }
+
+        .quiz-option {
+            background: #fff0f5;
+            border: 1px solid #f8bbd0;
+            padding: 12px 20px;
+            border-radius: 15px;
+            margin: 10px 0;
+            color: #4a1c2a;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .quiz-option:hover { background: #f8bbd0; color: var(--rose-deep); }
+        .quiz-feedback { margin-top: 15px; font-weight: 700; color: var(--rose-deep); font-size: 0.95rem; display: none; }
+
+        /* ===== ANIMASI BUNGA MEKAR ===== */
         .flower-gift-section { text-align: center; margin: 40px 20px; }
         .flower-gift-btn { background: linear-gradient(135deg, #e91e63, #c2185b); color: white; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.05rem; padding: 16px 36px; border: none; border-radius: 50px; box-shadow: 0 10px 30px rgba(194, 24, 88, 0.3); cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 12px; }
         .flower-gift-btn:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(194, 24, 88, 0.5); }
@@ -628,7 +693,7 @@
             <div class="music-gate-icon">🎼💖</div>
             <div class="music-gate-title">Muzik Cinta Kita</div>
             <div class="music-gate-msg">
-                Tekan kat bawah ni untuk buka lagu khas cinta kita dulu tau! 🌸
+                Tekan kat bawah ni untuk buka lagu khas cinta kita dulu tau sayang! Sambil-sambil tu boleh rasa vibe dia. 🌸
             </div>
             <button class="play-gate-btn" onclick="playMusicAndUnlock()">Mainkan Lagu 🎵</button>
         </div>
@@ -641,7 +706,7 @@
     <div id="opening">
         <div class="opening-heart">💖</div>
         <div class="opening-text">Untuk Ezatul Sayang</div>
-        <div class="opening-sub">Sebuah Surat Cinta</div>
+        <div class="opening-sub">Sebuah Surat Cinta Digital</div>
         <div class="opening-from">Dari Iskandar</div>
         <button class="tap-to-open" onclick="openMain()">✨ Buka Surat Cinta ✨</button>
     </div>
@@ -654,7 +719,7 @@
             <div class="hero-name" id="heroName"></div>
             <div class="hero-author-tag">&mdash; Dari Iskandar &mdash;</div>
             <div class="hero-subtitle">
-                "Awaklah jawapan paling indah untuk setiap doa yang saya pernah minta. Semoga hubungan kita sentiasa dijaga Allah."
+                "Anugerah terindah yang Allah titipkan buat hatiku. Semoga kasih kita sentiasa berada di bawah naungan rahmat-Nya."
             </div>
             <div class="hero-date">
                 <div class="hero-date-label"></div>
@@ -665,37 +730,83 @@
 
         <!-- SWEET ISLAMIC MESSAGES -->
         <section>
-            <h2 class="section-title reveal">Kata-Kata Dari Hati</h2>
+            <h2 class="section-title reveal">Ungkapan Tulus Dari Hati</h2>
             <div class="messages-container">
                 <div class="message-card reveal" onclick="revealLove(this)">
                     <span class="icon">🤲</span>
-                    <h3>Dalam Doa Saya</h3>
-                    <p>"Ezatul, setiap kali lepas solat, nama awak tak pernah tinggal. Saya selalu minta Allah permudahkan jalan kita untuk benda yang baik."</p>
+                    <h3>Doa Dalam Sujudku</h3>
+                    <p>"Ezatul, di setiap penghujung doaku, namamu sentiasa menjadi bait terindah yang ku titipkan. Moga Allah menuntun langkah kita menuju ikatan yang halal."</p>
                     <div class="hidden-love">🤍</div>
                 </div>
 
                 <div class="message-card reveal" onclick="revealLove(this)">
                     <span class="icon">⭐</span>
-                    <h3>Takdir Indah</h3>
-                    <p>"Bila dapat kenal dengan awak, saya tahu ini bukan kebetulan. Terima kasih sebab sudi hadir dan lengkapkan hidup saya."</p>
+                    <h3>Cahaya Takdir</h3>
+                    <p>"Kedatanganmu dalam hidupku bukanlah satu kebetulan, melainkan takdir indah yang telah dituliskan Allah di Lauhul Mahfuz untuk melengkapi agamaku."</p>
                     <div class="hidden-love">💫</div>
                 </div>
 
                 <div class="message-card reveal" onclick="revealLove(this)">
                     <span class="icon">🌸</span>
-                    <h3>Lelaki Qawwam Awak</h3>
-                    <p>"Saya berusaha untuk jadi lelaki yang qawwam untuk awak — pelindung, pembimbing, dan penyokong setia awak dunia akhirat."</p>
+                    <h3>Kasih Yang Diabadikan</h3>
+                    <p>"Cintaku padamu bukan sekadar untuk dunia yang sementara, tetapi sebuah pengharapan agar kita dapat berpimpinan tangan hingga ke syurga-Nya."</p>
                     <div class="hidden-love">🌷</div>
                 </div>
 
                 <div class="message-card reveal" onclick="revealLove(this)">
                     <span class="icon">💍</span>
-                    <h3>Niat Halal Saya</h3>
-                    <p>"Cinta saya kat awak sangat besar. Saya betul-betul jujur dan tak sabar nak jadikan awak isteri saya yang sah satu hari nanti."</p>
+                    <h3>Niat Yang Suci</h3>
+                    <p>"Cinta saya pada awak sangat besar. Tiada impian yang paling tulus melainkan niat untuk menjadikan awak sebagai ratu dalam mahligai rumah tangga kita kelak."</p>
                     <div class="hidden-love">💖</div>
+                </div>
+
+                <div class="message-card reveal" onclick="revealLove(this)">
+                    <span class="icon">🤗</span>
+                    <h3>Tempat Saya Mengadu</h3>
+                    <p>"Bila rasa penat dengan seharian, dengar suara awak atau baca mesej awak dah cukup buat hilang semua rasa letih. Awaklah ketenangan saya."</p>
+                    <div class="hidden-love">🥰</div>
+                </div>
+
+                <div class="message-card reveal" onclick="revealLove(this)">
+                    <span class="icon">👑</span>
+                    <h3>Bidadari Dunia Akhirat</h3>
+                    <p>"Impian terbesar saya cumalah nak pimpin tangan awak melangkah ke perkahwinan yang bahagia dan diredhai Allah sampai ke syurga kelak."</p>
+                    <div class="hidden-love">👰‍♀️</div>
                 </div>
             </div>
         </section>
+
+        <!-- SEKSYEN ALASAN KENAPA SAYA SAYANG AWAK -->
+        <div class="reasons-section reveal">
+            <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: var(--rose-deep);">Kenapa Saya Sayang Ezatul?</h2>
+            <p style="color: #8b5a6b; font-size: 0.95rem;">Tekan setiap kad kat bawah ni untuk tahu sebabnya tau! 🌹</p>
+            
+            <div class="reasons-grid">
+                <div class="reason-card" onclick="revealReason(this, 'Ezatul seorang yang sangat peka, selalu ambil berat pasal saya walaupun benda-benda kecil. Cara awak senyum buat saya rasa tenang sangat!')">
+                    <div class="reason-icon">💖</div>
+                    <div class="reason-title">Sebab Senyuman Awak</div>
+                    <div class="reason-desc">Tekan untuk baca...</div>
+                </div>
+
+                <div class="reason-card" onclick="revealReason(this, 'Ezatul selalu faham saya, sentiasa bagi semangat bila saya down. Awak tak pernah menghakimi dan selalu ada bila saya perlukan!')">
+                    <div class="reason-icon">🌸</div>
+                    <div class="reason-title">Sifat Pemaham Awak</div>
+                    <div class="reason-desc">Tekan untuk baca...</div>
+                </div>
+
+                <div class="reason-card" onclick="revealReason(this, 'Cara awak bercakap dan layan saya dengan penuh kelembutan buat saya rasa dihargai sangat-sangat sebagai seorang lelaki.')">
+                    <div class="reason-icon">✨</div>
+                    <div class="reason-title">Kelembutan Hati Awak</div>
+                    <div class="reason-desc">Tekan untuk baca...</div>
+                </div>
+
+                <div class="reason-card" onclick="revealReason(this, 'Sebab Ezatul lah satu-satunya orang yang saya nampak untuk bina masa depan, bertukar cerita, dan tua bersama sampai bila-bila!')">
+                    <div class="reason-icon">💍</div>
+                    <div class="reason-title">Impian Masa Depan</div>
+                    <div class="reason-desc">Tekan untuk baca...</div>
+                </div>
+            </div>
+        </div>
 
         <!-- MASA BERSAMA (TIMER SINCE 9 JAN 2026) -->
         <div class="time-together-card reveal">
@@ -724,20 +835,36 @@
         <!-- UNLIMITED LOVE PROGRESS BAR -->
         <div class="unlimited-love-card reveal">
             <div class="unlimited-title">Cinta & Kesetiaan Tanpa Had</div>
-            <div class="unlimited-sub">Sentiasa Bertambah Setiap Hari Dengan Izin Allah</div>
+            <div class="unlimited-sub">Meningkat Saban Hari Dengan Izin Allah</div>
             <div class="progress-container">
                 <div class="progress-bar" id="progressBar"></div>
                 <div class="progress-text" id="progressText">Loading Love... 0%</div>
             </div>
             <p style="margin-top:15px; font-size:0.85rem; color:#8b5a6b;">
-                ✨ <em>Sayang saya dekat awak melimpah-limpah dan takkan pernah habis.</em>
+                ✨ <em>Cintaku padamu melimpah melepasi kadar 100% dan tidak akan pernah habis.</em>
             </p>
+        </div>
+
+        <!-- MINI KUIS CINTA KITA -->
+        <div class="quiz-section reveal">
+            <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: var(--rose-deep);">Kuis Mini Cinta Kita 💡</h2>
+            <p style="color: #8b5a6b; font-size: 0.92rem; margin-bottom: 20px;">Sejauh mana Ezatul faham hati Iskandar? Cuba tekan jawapan kat bawah ni!</p>
+
+            <p style="font-weight: 600; color: #4a1c2a; text-align: left; margin-top: 15px;">1. Apa perkara pertama Iskandar fikir bila nampak mesej dari Ezatul?</p>
+            <div class="quiz-option" onclick="checkQuiz(this, true, 'Betul sangat! Mesti Iskandar terus tersenyum sorang-sorang bila nampak nama Ezatul masuk! 🥰')">A. Hati terus rasa gembira & tersenyum sorang-sorang</div>
+            <div class="quiz-option" onclick="checkQuiz(this, false, 'Salah tau! Mana ada biasa-biasa, mestilah gembira sangat!')">B. Biasa-biasa je macam mesej orang lain</div>
+
+            <p style="font-weight: 600; color: #4a1c2a; text-align: left; margin-top: 20px;">2. Apa impian terbesar Iskandar dalam hubungan kita ni?</p>
+            <div class="quiz-option" onclick="checkQuiz(this, true, 'Tepat sekali! Impian terbesar Iskandar ialah nak halalkan Ezatul dan bina keluarga bahagia bersama sampai bila-bila! 💍')">A. Nak kahwin dengan Ezatul & bina keluarga bahagia dunia akhirat</div>
+            <div class="quiz-option" onclick="checkQuiz(this, false, 'Mana ada kawan je! Iskandar betul-betul nak jadikan Ezatul isteri sah tau!')">B. Nak kawan macam ni je tak ada impian apa-apa</div>
+
+            <div class="quiz-feedback" id="quizFeedback"></div>
         </div>
 
         <!-- SEKSYEN BUNGA MEKAR -->
         <div class="flower-gift-section reveal">
             <button class="flower-gift-btn" onclick="giveFlower()">
-                <span>🌸🌹</span> Bunga Mekar Khas Untuk Ezatul
+                <span>🌸🌹</span> Bunga Mekar Tanda Kasih Suci
             </button>
         </div>
 
@@ -755,9 +882,9 @@
                     </div>
                 </div>
 
-                <div class="flower-modal-title">Bunga Mekar Untukmu</div>
+                <div class="flower-modal-title">Sebuah Bunga Murni</div>
                 <div class="flower-modal-msg">
-                    "Ezatul sayang, sejambak bunga ni mekar macam mana berbunganya hati saya bila dengan awak setiap hari." 🌸✨
+                    "Ezatul, seperti mana indahnya bunga ini mekar, begitulah mekar kasih dan rasa hormatku padamu setiap detik." 🌸✨
                 </div>
                 <button class="close-gift-btn" onclick="closeFlowerModal()">Simpan Dalam Hati 💕</button>
             </div>
@@ -765,35 +892,37 @@
 
         <!-- SPECIAL ISLAMIC PROMISE MESSAGE -->
         <div class="special-message reveal">
-            <h2>Janji Saya Kat Awak</h2>
+            <h2>Janji & Komitmen Suci</h2>
             <p>
-                Ezatul sayang, dengan sejujur-jujurnya dari dalam hati saya, 
-                <strong>saya berjanji akan belajar untuk jadi seorang qawwam yang terbaik buat awak</strong> — memimpin dengan kelembutan, melindungi awak dengan ketegasan, dan menjaga kebajikan awak sehabis baik.
+                <strong>Bismillahirahmanirrahim,</strong><br><br>
+                Ezatul sayang, bersaksikan niat yang ikhlas dari dalam hatiku, 
+                <strong>saya berjanji akan menjaga awak dengan penuh kebaikan, kelembutan, dan rasa tanggungjawab</strong>. 
+                Saya akan sentiasa berusaha memimpin dan menghormati awak sebaik mungkin.
             </p>
             <p style="margin-top:15px;">
-                Saya betul-betul nak kahwin dengan awak. Saya janji bila sampai harinya nanti, 
-                kita akan bina keluarga yang bahagia, tenang, dan penuh kasih sayang, Insya-Allah.
+                Cinta saya pada awak sangat besar, dan <strong>saya sungguh-sungguh mahu berkahwin dengan awak</strong>. 
+                Saya berjanji kita akan melangkah ke faham perkahwinan dan membina keluarga yang <em>Sakinah, Mawaddah, warahmah</em>, Insya-Allah.
             </p>
             <p style="margin-top:15px;">
-                Terima kasih sebab sudi terima saya dan ada dalam hidup saya.
+                Terima kasih kerana hadir dan menjadi bidadari dalam hidup saya.
             </p>
-            <div class="priceless">I Love You So Much, Ezatul 💖</div>
+            <div class="priceless">I Love You, Ezatul 💖</div>
         </div>
 
         <!-- ANIMASI ORANG LIDI KISAH PERJALANAN & IMPIAN HALAL -->
         <div class="stickman-section reveal" id="stickmanSection">
-            <div class="stickman-title">Kisah Perjalanan & Masa Depan Kita</div>
+            <div class="stickman-title">Kisah Perjalanan & Impian Masa Depan</div>
             
             <div class="stickman-apology-text">
-                "Ezatul sayang, minta maaf sangat tau saya tak dapat bagi bunga betul kat awak lagi... Buat masa ni, awak bayangkan la orang lidi ni saya, Iskandar, yang berusaha beli dan bagi bunga terindah khas untuk awak! 🌹"
+                "Ezatul sayang, maaf saya tak dapat bagi bunga betul dekat awak buat masa ini... Bayangkanlah orang lidi ni saya yang berusaha beli dan bagi bunga terindah khas untuk awak! 🌹"
             </div>
 
             <button class="open-anim-trigger-btn" id="startAnimBtn" onclick="openAndStartStickmanStory()">
-                <span>🎁</span> Buka Animasi Cinta Iskandar & Ezatul
+                <span>🎁</span> Buka Animasi Cinta
             </button>
 
             <div class="stickman-stage-container" id="stickmanStageContainer">
-                <div class="scene-badge" id="sceneBadge">Babak 1: Iskandar Beli & Bagi Bunga</div>
+                <div class="scene-badge" id="sceneBadge">Babak 1: Hadiah Bunga Tulus</div>
 
                 <div class="stickman-stage">
                     <div class="stage-ground"></div>
@@ -807,7 +936,7 @@
                     <!-- PELAMIN (BABAK 2) -->
                     <div class="pelamin-decor" id="pelaminDecor">
                         <div class="pelamin-arch">💒💐✨</div>
-                        <div class="pelamin-text">Hari Bahagia Iskandar & Ezatul</div>
+                        <div class="pelamin-text">Hari Bahagia KITA</div>
                     </div>
 
                     <!-- RUMAH (BABAK 3 & 4) -->
@@ -846,29 +975,29 @@
                     <div class="love-heart-pop" id="loveHeartPop">💖</div>
                 </div>
 
-                <button class="replay-anim-btn" onclick="runFullStickmanTimeline()">Main Semula Animasi 🔄</button>
+                <button class="replay-anim-btn" onclick="runFullStickmanTimeline()">Putar Semula Animasi 🔄</button>
             </div>
         </div>
 
         <!-- WHATSAPP REPLY CARD (BAHAGIAN BALAS CHAT) -->
         <div class="whatsapp-reply-card reveal">
-            <h3>Jawapan Dari Awak</h3>
+            <h3>Balasan Hatimu</h3>
             <p>
-                Ezatul sayang, kalau awak pun rasa benda yang sama dan setuju dengan hasrat ikhlas saya ni, tekan butang kat bawah ni untuk balas terus ke WhatsApp saya tau! 🌹
+                Ezatul sayang, jika hati awak juga bersetuju dengan segala hajat dan niat ikhlas saya, sentuh butang di bawah untuk menghantar jawapan indahmu terus ke WhatsApp saya. 🌹
             </p>
             <!-- TUKARKAN 601XXXXXXXX DENGAN NOMBOR TELEFON WHATSAPP ANDA -->
             <a id="waBtn" href="https://wa.me/601XXXXXXXX?text=Saya%20pun%20nak%20kahwin%20dengan%20awak%2C%20sayang%20awak%20Iskandar%20%F0%9F%92%96" target="_blank" class="wa-reply-btn">
-                <span>💬</span> Balas Mesej Dekat WhatsApp
+                <span>💬</span> Balas Mesej Di WhatsApp
             </a>
         </div>
 
         <!-- FOOTER -->
         <div class="footer">
             <div class="footer-heart">💖</div>
-            <div class="footer-text">Semoga Allah Jaga Hubungan Kita</div>
-            <div class="footer-name">KHAS UNTUK EZATUL SAYANG</div>
-            <p style="margin-top:15px; color:#8b5a6b; font-size:0.85rem; font-weight:600;">
-                Ikhlas dari Iskandar &middot; 2026
+            <div class="footer-text">Semoga Allah Memelihara Ikatan Kita</div>
+            <div class="footer-name">EZATUL</div>
+            <p style="margin-top:20px; color:#8b5a6b; font-size:0.8rem;">
+                Dibuat dengan penuh keikhlasan oleh Iskandar &middot; 2026
             </p>
         </div>
     </div>
@@ -983,6 +1112,37 @@
             }
         }
 
+        // ===== REVEAL REASON CARD =====
+        function revealReason(card, text) {
+            const desc = card.querySelector('.reason-desc');
+            desc.textContent = text;
+            desc.style.color = 'var(--rose-deep)';
+            desc.style.fontWeight = '500';
+
+            const rect = card.getBoundingClientRect();
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    createParticle(rect.left + rect.width/2, rect.top + rect.height/2, ['💖','🌸','✨']);
+                }, i * 30);
+            }
+        }
+
+        // ===== CHECK QUIZ =====
+        function checkQuiz(element, isCorrect, feedbackText) {
+            const feedback = document.getElementById('quizFeedback');
+            feedback.style.display = 'block';
+            feedback.textContent = feedbackText;
+
+            const rect = element.getBoundingClientRect();
+            if (isCorrect) {
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        createParticle(rect.left + rect.width/2, rect.top, ['🥰','✨','💖']);
+                    }, i * 30);
+                }
+            }
+        }
+
         // ===== TIMER SINCE 9 JANUARI 2026 =====
         function startTogetherTimer() {
             const startDate = new Date('2026-01-09T00:00:00');
@@ -1071,7 +1231,7 @@
             const badge = document.getElementById('sceneBadge');
 
             // RESET ALL ELEMENTS
-            badge.textContent = "Babak 1: Iskandar Beli & Bagi Bunga";
+            badge.textContent = "Babak 1: Hadiah Bunga Tulus";
             shop.style.opacity = '1';
             pelamin.style.opacity = '0';
             house.style.opacity = '0';
@@ -1116,15 +1276,17 @@
 
             // --- BABAK 2: DI ATAS PELAMIN (HARI HALAL) ---
             setTimeout(() => {
-                badge.textContent = "Babak 2: Iskandar & Ezatul Bersanding 💒";
+                badge.textContent = "Babak 2: Ijab & Qabul di Atas Pelamin 💒";
                 shop.style.opacity = '0';
                 pelamin.style.opacity = '1';
                 heart.style.opacity = '0';
                 flower.style.opacity = '0';
 
+                // Pakai busana pengantin
                 songkok.style.opacity = '1';
                 crown.style.opacity = '1';
 
+                // Duduk bersanding rapat di pelamin
                 boy.style.transition = 'left 1.5s ease';
                 boy.style.left = '42%';
                 
@@ -1148,10 +1310,11 @@
 
             // --- BABAK 3 & 4: SUAMI ISTERI & CAHAYA MATA ---
             setTimeout(() => {
-                badge.textContent = "Babak 3 & 4: Bahagia Bersama & Cahaya Mata 👶";
+                badge.textContent = "Babak 3 & 4: Bahagia Suami Isteri & Cahaya Mata 👶";
                 pelamin.style.opacity = '0';
                 house.style.opacity = '1';
 
+                // Posisi keluarga kecil
                 boy.style.left = '38%';
                 girl.style.right = '38%';
             }, 13000);
