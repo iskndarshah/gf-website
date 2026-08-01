@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Untuk Ezatul Nadiah — Bidadari Hatiku</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --rose-deep: #c2185b;
+            --rose-soft: #f8bbd0;
+            --rose-gold: #d4a574;
+            --cream: #fff5f7;
+            --gold: #ffd700;
+            --shadow-pink: rgba(194, 24, 88, 0.15);
+            --whatsapp-green: #25D366;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 25%, #fff5f7 50%, #ffeef0 75%, #fff0f5 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: #4a1c2a;
+        }
+
+        body.no-scroll {
+            overflow: hidden !important;
+            height: 100vh;
+        }
+
+        /* ===== FLOATING FLOWERS BACKGROUND ===== */
+        .flower-petal {
+            position: fixed;
+            top: -50px;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 0;
+            animation: fall linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-50px) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
+        }
+
+        /* ===== MUSIC CONTROLLER BUTTON ===== */
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10001;
+            background: rgba(255, 255, 255, 0.85);
+            border: 2px solid var(--rose-soft);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(194, 24, 88, 0.2);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover { transform: scale(1.1); }
+
+        /* ===== OPENING SCREEN ===== */
+        #opening {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #c2185b, #880e4f, #ad1457);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 1.5s ease, visibility 1.5s;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #opening.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .opening-heart {
+            font-size: 80px;
+            animation: heartbeat 1.2s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+        }
+
+        .opening-text {
+            color: white;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            margin-top: 20px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+        }
+
+        .opening-sub {
+            color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+            margin-top: 10px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease 0.5s forwards;
+            opacity: 0;
+        }
+
+        .tap-to-open {
+            margin-top: 40px;
+            padding: 15px 40px;
+            border: 2px solid rgba(255,255,255,0.6);
+            border-radius: 50px;
+            color: white;
+            background: rgba(255,255,255,0.1);
+            font-size: 1rem;
+            cursor: pointer;
+            animation: pulse-glow 2s ease-in-out infinite, fadeInUp 1s ease 1s forwards;
+            opacity: 0;
+            backdrop-filter: blur(10px);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+            50% { box-shadow: 0 0 40px rgba(255,255,255,0.5); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== POPUP WAJIB PLAY LAGU ===== */
+        .music-gate-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 10002;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .music-gate-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .music-gate-card {
+            background: linear-gradient(135deg, #ffffff, #fff0f5);
+            width: 88%;
+            max-width: 400px;
+            border-radius: 28px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(194, 24, 88, 0.5);
+            border: 2px solid rgba(255, 182, 193, 0.9);
+            position: relative;
+        }
+
+        .music-gate-icon { font-size: 3.5rem; margin-bottom: 15px; animation: heartbeat 1.5s infinite; }
+        .music-gate-title { font-family: 'Great Vibes', cursive; font-size: 2.3rem; color: var(--rose-deep); margin-bottom: 10px; }
+        .music-gate-msg { color: #6b3d4a; font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; }
+
+        .play-gate-btn {
+            background: linear-gradient(135deg, #e91e63, #c2185b);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(194, 24, 88, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-gate-btn:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(194, 24, 88, 0.6); }
+
+        /* ===== MAIN CONTENT ===== */
+        #main-content { display: none; position: relative; z-index: 1; }
+        #main-content.visible { display: block; animation: fadeIn 1.5s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .hero-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: var(--rose-deep);
+            text-shadow: 2px 2px 0px var(--rose-soft), 0 0 60px rgba(194,24,88,0.2);
+            animation: nameGlow 3s ease-in-out infinite;
+            line-height: 1.2;
+        }
+
+        .hero-name span { display: inline-block; animation: letterBounce 2s ease-in-out infinite; }
+
+        @keyframes letterBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes nameGlow { 0%, 100% { filter: drop-shadow(0 0 20px rgba(194,24,88,0.3)); } 50% { filter: drop-shadow(0 0 40px rgba(194,24,88,0.6)); } }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+            color: #8b5a6b;
+            margin-top: 15px;
+            letter-spacing: 1px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .hero-date {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,240,245,0.9));
+            border-radius: 20px;
+            box-shadow: 0 8px 32px var(--shadow-pink);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        .hero-date-label { font-size: 0.85rem; color: #8b5a6b; text-transform: uppercase; letter-spacing: 2px; }
+        .hero-date-value { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--rose-deep); font-weight: 700; margin-top: 5px; }
+
+        .scroll-hint { position: absolute; bottom: 30px; animation: bounceDown 2s ease-in-out infinite; color: var(--rose-deep); font-size: 2rem; opacity: 0.6; }
+
+        @keyframes bounceDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(15px); } }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 60px 20px; max-width: 900px; margin: 0 auto; position: relative; }
+
+        .section-title { font-family: 'Great Vibes', cursive; font-size: clamp(2.2rem, 6vw, 3.5rem); color: var(--rose-deep); text-align: center; margin-bottom: 40px; position: relative; }
+        .section-title::after { content: '🌸'; display: block; font-size: 1.5rem; margin-top: 10px; animation: spinSlow 4s linear infinite; }
+
+        @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* ===== LOVE MESSAGES CARDS ===== */
+        .messages-container { display: grid; gap: 20px; }
+
+        .message-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,245,247,0.95));
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 10px 40px var(--shadow-pink);
+            border: 1px solid rgba(255,255,255,0.8);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .message-card:hover, .message-card:active { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 60px rgba(194,24,88,0.2); }
+        .message-card .icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .message-card h3 { font-family: 'Playfair Display', serif; color: var(--rose-deep); font-size: 1.3rem; margin-bottom: 10px; }
+        .message-card p { color: #6b3d4a; line-height: 1.8; font-size: 0.95rem; }
+
+        .message-card .hidden-love {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); font-size: 4rem; opacity: 0; transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); pointer-events: none;
+        }
+
+        .message-card.revealed .hidden-love { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        .message-card.revealed { background: linear-gradient(135deg, #fff0f5, #ffe4e1); }
+
+        /* ===== UNLIMITED LOVE PROGRESS BAR ===== */
+        .unlimited-love-card {
+            background: linear-gradient(135deg, #ffffff, #fff0f5); border-radius: 30px; padding: 40px 30px; margin: 40px 20px; box-shadow: 0 15px 50px var(--shadow-pink); border: 2px solid rgba(255, 182, 193, 0.6); text-align: center;
+        }
+
+        .unlimited-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--rose-deep); margin-bottom: 10px; }
+        .unlimited-sub { color: #8b5a6b; font-size: 0.95rem; margin-bottom: 30px; }
+
+        .progress-container { width: 100%; background: #ffe4e1; height: 28px; border-radius: 20px; overflow: hidden; position: relative; box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); border: 2px solid rgba(194, 24, 88, 0.2); }
+        .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #f8bbd0, #e91e63, #c2185b); border-radius: 20px; transition: width 0.1s linear; position: relative; box-shadow: 0 0 15px rgba(233, 30, 99, 0.6); }
+        .progress-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #4a1c2a; font-size: 0.95rem; letter-spacing: 1px; z-index: 2; }
+
+        /* ===== MASA BERSAMA (TIMER SINCE 9 JAN 2026) ===== */
+        .time-together-card { background: linear-gradient(135deg, var(--rose-deep), #880e4f); border-radius: 30px; padding: 40px 25px; margin: 40px 20px; color: white; text-align: center; box-shadow: 0 20px 50px rgba(194,24,88,0.3); }
+        .time-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; margin-bottom: 10px; }
+        .time-subtitle { font-size: 0.85rem; opacity: 0.9; margin-bottom: 25px; letter-spacing: 2px; }
+        .time-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .time-box { background: rgba(255, 255, 255, 0.15); padding: 15px 5px; border-radius: 18px; backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .time-number { font-size: 1.8rem; font-weight: 700; font-family: 'Playfair Display', serif; }
+        .time-label { font-size: 0.75rem; opacity: 0.85; margin-top: 5px; text-transform: uppercase; }
+
+        /* ===== ANIMATION BUNGA MEKAR ===== */
+        .flower-gift-section { text-align: center; margin: 40px 20px; }
+        .flower-gift-btn { background: linear-gradient(135deg, #e91e63, #c2185b); color: white; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.05rem; padding: 16px 36px; border: none; border-radius: 50px; box-shadow: 0 10px 30px rgba(194, 24, 88, 0.3); cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 12px; }
+        .flower-gift-btn:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(194, 24, 88, 0.5); }
+
+        .flower-modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.5s ease; }
+        .flower-modal-overlay.active { opacity: 1; visibility: visible; }
+        .flower-modal-card { background: linear-gradient(135deg, #ffffff, #fff0f5); width: 90%; max-width: 450px; border-radius: 30px; padding: 40px 25px; text-align: center; box-shadow: 0 20px 60px rgba(194, 24, 88, 0.4); border: 2px solid rgba(255, 182, 193, 0.8); position: relative; transform: scale(0.7) translateY(100px); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); overflow: hidden; }
+        .flower-modal-overlay.active .flower-modal-card { transform: scale(1) translateY(0); }
+
+        .blooming-rose-wrapper { position: relative; width: 140px; height: 140px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; }
+        .blooming-rose { position: relative; width: 90px; height: 90px; }
+        .petal-layer { position: absolute; top: 50%; left: 50%; border-radius: 50% 50% 50% 0; background: linear-gradient(135deg, #ff1744, #c2185b); box-shadow: 0 0 15px rgba(233, 30, 99, 0.4); transform-origin: 0% 100%; opacity: 0; transform: translate(-50%, -50%) scale(0) rotate(0deg); }
+        .flower-modal-overlay.active .petal-layer { animation: bloomPetal 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+
+        .p1 { width: 70px; height: 70px; animation-delay: 0.2s !important; }
+        .p2 { width: 70px; height: 70px; animation-delay: 0.4s !important; transform: translate(-50%, -50%) rotate(72deg) scale(0); }
+        .p3 { width: 70px; height: 70px; animation-delay: 0.6s !important; transform: translate(-50%, -50%) rotate(144deg) scale(0); }
+        .p4 { width: 70px; height: 70px; animation-delay: 0.8s !important; transform: translate(-50%, -50%) rotate(216deg) scale(0); }
+        .p5 { width: 70px; height: 70px; animation-delay: 1.0s !important; transform: translate(-50%, -50%) rotate(288deg) scale(0); }
+
+        .rose-center { position: absolute; top: 50%; left: 50%; width: 35px; height: 35px; background: radial-gradient(circle, #ff80ab, #d81b60); border-radius: 50%; transform: translate(-50%, -50%) scale(0); z-index: 10; box-shadow: 0 0 20px #ff4081; }
+        .flower-modal-overlay.active .rose-center { animation: bloomCenter 1.8s ease-out 1.2s forwards; }
+
+        @keyframes bloomPetal { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0) rotate(0deg); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1.2) rotate(var(--rot)); } }
+        @keyframes bloomCenter { 0% { transform: translate(-50%, -50%) scale(0); } 100% { transform: translate(-50%, -50%) scale(1.1); } }
+
+        .flower-modal-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--rose-deep); margin-bottom: 10px; }
+        .flower-modal-msg { color: #6b3d4a; font-size: 0.95rem; line-height: 1.7; margin-bottom: 25px; }
+
+        .close-gift-btn { background: var(--rose-soft); color: var(--rose-deep); border: none; padding: 10px 28px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .close-gift-btn:hover { background: var(--rose-deep); color: white; }
+
+        /* ===== SPECIAL ISLAMIC PROMISE MESSAGE ===== */
+        .special-message { background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,250,252,0.95)); border-radius: 30px; padding: 50px 30px; margin: 40px 20px; text-align: center; box-shadow: 0 15px 50px var(--shadow-pink); border: 2px solid rgba(255,215,0,0.3); position: relative; }
+        .special-message::before { content: '✨'; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 2.5rem; background: white; padding: 0 20px; border-radius: 50%; }
+        .special-message h2 { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--rose-deep); margin-bottom: 20px; }
+        .special-message p { color: #6b3d4a; line-height: 2; font-size: 0.98rem; max-width: 650px; margin: 0 auto; }
+
+        .priceless { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--gold); text-shadow: 0 2px 10px rgba(255,215,0,0.3); margin-top: 20px; display: inline-block; }
+
+        /* ===== ANIMASI ORANG LIDI PERJALANAN CINTA & IMPIAN HALAL ===== */
+        .stickman-section {
+            background: linear-gradient(135deg, #ffffff, #fff5f8);
+            border-radius: 30px;
+            padding: 35px 20px;
+            margin: 40px 20px;
+            box-shadow: 0 15px 50px var(--shadow-pink);
+            border: 2px solid rgba(255, 182, 193, 0.7);
+            text-align: center;
+        }
+
+        .stickman-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--rose-deep); margin-bottom: 5px; }
+        
+        .stickman-apology-text {
+            color: #6b3d4a;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            background: rgba(255, 240, 245, 0.8);
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin: 15px auto 25px auto;
+            max-width: 600px;
+            border: 1px dashed var(--rose-deep);
+        }
+
+        .open-anim-trigger-btn {
+            background: linear-gradient(135deg, #e91e63, #c2185b);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(194, 24, 88, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .open-anim-trigger-btn:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(194, 24, 88, 0.5); }
+
+        .stickman-stage-container {
+            display: none;
+            margin-top: 25px;
+            animation: fadeIn 1s ease;
+        }
+
+        .stickman-stage-container.active { display: block; }
+
+        .scene-badge {
+            display: inline-block;
+            background: var(--rose-deep);
+            color: white;
+            font-size: 0.85rem;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(194,24,88,0.2);
+        }
+
+        .stickman-stage {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(180deg, #fff0f5 0%, #ffe4e1 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 2px dashed rgba(194, 24, 88, 0.2);
+        }
+
+        .stage-ground { position: absolute; bottom: 0; left: 0; right: 0; height: 20px; background: #f8bbd0; border-top: 3px solid #c2185b; }
+
+        /* KEDAI BUNGA (BABAK 1) */
+        .flower-shop { position: absolute; bottom: 20px; left: 35%; transform: translateX(-50%); text-align: center; z-index: 2; transition: opacity 0.5s; }
+        .shop-roof { font-size: 1.8rem; line-height: 1; }
+        .shop-sign { background: #c2185b; color: white; font-size: 0.65rem; padding: 2px 8px; border-radius: 10px; font-weight: bold; }
+
+        /* PELAMIN & DEKORASI (BABAK 2) */
+        .pelamin-decor { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); text-align: center; opacity: 0; transition: opacity 0.8s; z-index: 2; width: 80%; }
+        .pelamin-arch { font-size: 2.8rem; line-height: 1; }
+        .pelamin-text { font-family: 'Great Vibes', cursive; color: #c2185b; font-size: 1.2rem; margin-top: -10px; }
+
+        /* RUMAH & CAHAYA MATA (BABAK 3 & 4) */
+        .house-decor { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); text-align: center; opacity: 0; transition: opacity 0.8s; z-index: 2; }
+        .house-icon { font-size: 3rem; }
+
+        /* CHARACTER ORANG LIDI LELAKI */
+        .stickman-boy { position: absolute; bottom: 20px; left: 5%; z-index: 5; display: flex; flex-direction: column; align-items: center; transition: all 0.5s ease; }
+        .boy-head { width: 22px; height: 22px; border: 3px solid #4a1c2a; border-radius: 50%; background: #fff; }
+        .boy-body { width: 3px; height: 28px; background: #4a1c2a; position: relative; }
+        .boy-arm-left, .boy-arm-right { position: absolute; top: 5px; width: 14px; height: 3px; background: #4a1c2a; }
+        .boy-arm-left { left: -14px; transform: rotate(20deg); }
+        .boy-arm-right { right: -14px; transform: rotate(-20deg); }
+        .boy-leg-left, .boy-leg-right { position: absolute; bottom: -18px; width: 3px; height: 20px; background: #4a1c2a; }
+        .boy-leg-left { left: -4px; transform: rotate(20deg); }
+        .boy-leg-right { right: -4px; transform: rotate(-20deg); }
+        .boy-flower { position: absolute; right: -18px; top: -5px; font-size: 1.2rem; opacity: 0; transition: opacity 0.3s; }
+        .boy-songkok { position: absolute; top: -7px; font-size: 0.75rem; opacity: 0; }
+
+        /* CHARACTER ORANG LIDI PEREMPUAN */
+        .stickman-girl { position: absolute; bottom: 20px; right: 12%; z-index: 5; display: flex; flex-direction: column; align-items: center; transition: all 0.5s ease; }
+        .girl-head { width: 22px; height: 22px; border: 3px solid #c2185b; border-radius: 50%; background: #fff; position: relative; }
+        .girl-bow { position: absolute; top: -8px; right: -2px; font-size: 0.7rem; }
+        .girl-body { width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 26px solid #c2185b; position: relative; }
+        .girl-leg-left, .girl-leg-right { position: absolute; bottom: -18px; width: 3px; height: 18px; background: #c2185b; }
+        .girl-leg-left { left: -5px; }
+        .girl-leg-right { right: -5px; }
+        .girl-crown { position: absolute; top: -10px; font-size: 0.8rem; opacity: 0; }
+
+        /* BABY STICKMAN */
+        .stickman-baby { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); opacity: 0; z-index: 6; font-size: 1.5rem; transition: all 0.5s ease; }
+
+        /* HATI BURST */
+        .love-heart-pop { position: absolute; bottom: 75px; left: 50%; transform: translateX(-50%) scale(0); font-size: 2.2rem; opacity: 0; transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 10; }
+
+        .replay-anim-btn { margin-top: 20px; background: transparent; border: 1px dashed var(--rose-deep); color: var(--rose-deep); font-size: 0.85rem; padding: 8px 20px; border-radius: 20px; cursor: pointer; transition: 0.3s; }
+        .replay-anim-btn:hover { background: var(--rose-soft); }
+
+        /* ===== WHATSAPP REPLY SECTION ===== */
+        .whatsapp-reply-card {
+            background: linear-gradient(135deg, #ffffff, #f0fff4);
+            border-radius: 30px;
+            padding: 45px 25px;
+            margin: 40px 20px 20px 20px;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(37, 211, 102, 0.2);
+            border: 2px solid rgba(37, 211, 102, 0.4);
+            position: relative;
+        }
+
+        .whatsapp-reply-card h3 { font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #128C7E; margin-bottom: 10px; }
+        .whatsapp-reply-card p { color: #4a1c2a; font-size: 0.95rem; line-height: 1.7; margin-bottom: 30px; }
+
+        .wa-reply-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .wa-reply-btn:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6); }
+
+        /* ===== FOOTER ===== */
+        .footer { text-align: center; padding: 60px 20px; background: linear-gradient(135deg, rgba(194,24,88,0.05), transparent); }
+        .footer-heart { font-size: 3rem; animation: heartbeat 1.5s ease-in-out infinite; display: inline-block; }
+        .footer-text { font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--rose-deep); margin-top: 15px; }
+        .footer-name { font-family: 'Playfair Display', serif; font-size: 1rem; color: #8b5a6b; margin-top: 10px; letter-spacing: 3px; }
+
+        /* ===== PARTICLE EFFECTS ===== */
+        .particle { position: fixed; pointer-events: none; z-index: 9998; font-size: 20px; animation: particleFly 1.8s ease-out forwards; }
+
+        @keyframes particleFly { 0% { transform: translate(0, 0) scale(0.5) rotate(0deg); opacity: 1; } 100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(360deg); opacity: 0; } }
+
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 600px) {
+            .hero-name { font-size: 3rem; }
+            .message-card { padding: 20px; }
+            .time-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            section { padding: 40px 15px; }
+        }
+    </style>
+</head>
+<body class="no-scroll">
+
+    <!-- PEMAIN MUZIK (AUDIO PLAYER) -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://iskndarshah.github.io/0801.mp3" type="audio/mpeg">
+        Browser anda tidak menyokong elemen audio.
+    </audio>
+
+    <!-- BUTANG KAWALAN MUZIK TERAPUNG -->
+    <button class="music-btn" id="musicToggle" onclick="toggleMusic()">🎵</button>
+
+    <!-- POPUP WAJIB PLAY LAGU SEBELUM BOLEH SCROLL -->
+    <div class="music-gate-overlay" id="musicGateModal">
+        <div class="music-gate-card">
+            <div class="music-gate-icon">🎼💖</div>
+            <div class="music-gate-title">Muzik Cinta Kita</div>
+            <div class="music-gate-msg">
+                Sila mainkan lagu latar belakang ini terlebih dahulu untuk meneruskan pembacaan surat cinta digital ini. 🌸
+            </div>
+            <button class="play-gate-btn" onclick="playMusicAndUnlock()">Mainkan Lagu 🎵</button>
+        </div>
+    </div>
+
+    <!-- FLOATING FLOWERS BACKGROUND -->
+    <div id="flower-container"></div>
+
+    <!-- OPENING SCREEN -->
+    <div id="opening">
+        <div class="opening-heart">💖</div>
+        <div class="opening-text">Bismillahirahmanirrahim</div>
+        <div class="opening-sub">Khusus Untuk Pemilik Hatiku, Ezatul Nadiah</div>
+        <button class="tap-to-open" onclick="openMain()">✨ Tekan Untuk Buka Surat ✨</button>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main-content">
+
+        <!-- HERO -->
+        <div class="hero">
+            <div class="hero-name" id="heroName"></div>
+            <div class="hero-subtitle">
+                "Anugerah terindah yang Allah titipkan buat hatiku. Semoga kasih kita sentiasa berada di bawah naungan rahmat-Nya."
+            </div>
+            <div class="hero-date">
+                <div class="hero-date-label">Memohon Keredhaan Allah</div>
+                <div class="hero-date-value" id="currentDate"></div>
+            </div>
+            <div class="scroll-hint">↓</div>
+        </div>
+
+        <!-- SWEET ISLAMIC MESSAGES -->
+        <section>
+            <h2 class="section-title reveal">Ungkapan Tulus Dari Hati</h2>
+            <div class="messages-container">
+                <div class="message-card reveal" onclick="revealLove(this)">
+                    <span class="icon">🤲</span>
+                    <h3>Doa Dalam Sujudku</h3>
+                    <p>"Ezatul Nadiah, di setiap penghujung doaku, namamu sentiasa menjadi bait terindah yang ku titipkan. Moga Allah menuntun langkah kita menuju ikatan yang halal."</p>
+                    <div class="hidden-love">🤍</div>
+                </div>
+
+                <div class="message-card reveal" onclick="revealLove(this)">
+                    <span class="icon">⭐</span>
+                    <h3>Cahaya Takdir</h3>
+                    <p>"Kedatanganmu dalam hidupku bukanlah satu kebetulan, melainkan takdir indah yang telah dituliskan Allah di Lauhul Mahfuz untuk melengkapi agamaku."</p>
+                    <div class="hidden-love">💫</div>
+                </div>
+
+                <div class="message-card reveal" onclick="revealLove(this)">
+                    <span class="icon">🌸</span>
+                    <h3>Kasih Yang Diabadikan</h3>
+                    <p>"Cintaku padamu bukan sekadar untuk dunia yang sementara, tetapi sebuah pengharapan agar kita dapat berpimpinan tangan hingga ke syurga-Nya."</p>
+                    <div class="hidden-love">🌷</div>
+                </div>
+
+                <div class="message-card reveal" onclick="revealLove(this)">
+                    <span class="icon">💍</span>
+                    <h3>Niat Yang Suci</h3>
+                    <p>"Cinta saya pada awak sangat besar. Tiada impian yang paling tulus melainkan niat untuk menjadikan awak sebagai ratu dalam mahligai rumah tangga kita kelak."</p>
+                    <div class="hidden-love">💖</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MASA BERSAMA (TIMER SINCE 9 JAN 2026) -->
+        <div class="time-together-card reveal">
+            <div class="time-title">Masa Indah Bersamamu</div>
+            <div class="time-subtitle">SEJAK 9 JANUARI 2026 BERMULA KISAH KITA</div>
+            <div class="time-grid">
+                <div class="time-box">
+                    <div class="time-number" id="days">0</div>
+                    <div class="time-label">Hari</div>
+                </div>
+                <div class="time-box">
+                    <div class="time-number" id="hours">0</div>
+                    <div class="time-label">Jam</div>
+                </div>
+                <div class="time-box">
+                    <div class="time-number" id="minutes">0</div>
+                    <div class="time-label">Minit</div>
+                </div>
+                <div class="time-box">
+                    <div class="time-number" id="seconds">0</div>
+                    <div class="time-label">Saat</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNLIMITED LOVE PROGRESS BAR -->
+        <div class="unlimited-love-card reveal">
+            <div class="unlimited-title">Cinta & Kesetiaan Tanpa Had</div>
+            <div class="unlimited-sub">Meningkat Saban Hari Dengan Izin Allah</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+                <div class="progress-text" id="progressText">Loading Love... 0%</div>
+            </div>
+            <p style="margin-top:15px; font-size:0.85rem; color:#8b5a6b;">
+                ✨ <em>Cintaku padamu melimpah melepasi kadar 100% dan tidak akan pernah habis.</em>
+            </p>
+        </div>
+
+        <!-- SEKSYEN BUNGA MEKAR -->
+        <div class="flower-gift-section reveal">
+            <button class="flower-gift-btn" onclick="giveFlower()">
+                <span>🌸🌹</span> Bunga Mekar Tanda Kasih Suci
+            </button>
+        </div>
+
+        <!-- MODAL BUNGA MEKAR -->
+        <div class="flower-modal-overlay" id="flowerModal">
+            <div class="flower-modal-card">
+                <div class="blooming-rose-wrapper">
+                    <div class="blooming-rose">
+                        <div class="petal-layer p1" style="--rot: 0deg;"></div>
+                        <div class="petal-layer p2" style="--rot: 72deg;"></div>
+                        <div class="petal-layer p3" style="--rot: 144deg;"></div>
+                        <div class="petal-layer p4" style="--rot: 216deg;"></div>
+                        <div class="petal-layer p5" style="--rot: 288deg;"></div>
+                        <div class="rose-center"></div>
+                    </div>
+                </div>
+
+                <div class="flower-modal-title">Sebuah Bunga Murni</div>
+                <div class="flower-modal-msg">
+                    "Ezatul Nadiah, seperti mana indahnya bunga ini mekar, begitulah mekar kasih dan rasa hormatku padamu setiap detik." 🌸✨
+                </div>
+                <button class="close-gift-btn" onclick="closeFlowerModal()">Simpan Dalam Hati 💕</button>
+            </div>
+        </div>
+
+        <!-- SPECIAL ISLAMIC PROMISE MESSAGE -->
+        <div class="special-message reveal">
+            <h2>Janji & Komitmen Suci</h2>
+            <p>
+                <strong>Bismillahirahmanirrahim,</strong><br><br>
+                Ezatul Nadiah sayang, bersaksikan niat yang ikhlas dari dalam hatiku, 
+                <strong>saya berjanji akan menjaga awak dengan penuh kebaikan, kelembutan, dan rasa tanggungjawab</strong>. 
+                Saya akan sentiasa berusaha memimpin dan menghormati awak sebaik mungkin.
+            </p>
+            <p style="margin-top:15px;">
+                Cinta saya pada awak sangat besar, dan <strong>saya sungguh-sungguh mahu berkahwin dengan awak</strong>. 
+                Saya berjanji kita akan melangkah ke faham perkahwinan dan membina keluarga yang <em>Sakinah, Mawaddah, warahmah</em>, Insya-Allah.
+            </p>
+            <p style="margin-top:15px;">
+                Terima kasih kerana hadir dan menjadi bidadari dalam hidup saya.
+            </p>
+            <div class="priceless">I Love You, Ezatul Nadiah 💖</div>
+        </div>
+
+        <!-- ANIMASI ORANG LIDI KISAH PERJALANAN & IMPIAN HALAL -->
+        <div class="stickman-section reveal" id="stickmanSection">
+            <div class="stickman-title">Kisah Perjalanan & Impian Masa Depan</div>
+            
+            <div class="stickman-apology-text">
+                "Ezatul sayang, maaf saya tak dapat bagi bunga betul dekat awak buat masa ini... Bayangkanlah orang lidi ni saya yang berusaha beli dan bagi bunga terindah khas untuk awak! 🌹"
+            </div>
+
+            <button class="open-anim-trigger-btn" id="startAnimBtn" onclick="openAndStartStickmanStory()">
+                <span>🎁</span> Buka Animasi Cinta
+            </button>
+
+            <div class="stickman-stage-container" id="stickmanStageContainer">
+                <div class="scene-badge" id="sceneBadge">Babak 1: Hadiah Bunga Tulus</div>
+
+                <div class="stickman-stage">
+                    <div class="stage-ground"></div>
+
+                    <!-- KEDAI BUNGA (BABAK 1) -->
+                    <div class="flower-shop" id="flowerShop">
+                        <div class="shop-roof">🏪🌸</div>
+                        <div class="shop-sign">Kedai Bunga</div>
+                    </div>
+
+                    <!-- PELAMIN (BABAK 2) -->
+                    <div class="pelamin-decor" id="pelaminDecor">
+                        <div class="pelamin-arch">💒💐✨</div>
+                        <div class="pelamin-text">Hari Bahagia KITA</div>
+                    </div>
+
+                    <!-- RUMAH (BABAK 3 & 4) -->
+                    <div class="house-decor" id="houseDecor">
+                        <div class="house-icon">🏡🌸</div>
+                    </div>
+
+                    <!-- ORANG LIDI LELAKI (ISKANDAR) -->
+                    <div class="stickman-boy" id="stickmanBoy">
+                        <div class="boy-head"></div>
+                        <div class="boy-body">
+                            <div class="boy-songkok" id="boySongkok">🎩</div>
+                            <div class="boy-arm-left"></div>
+                            <div class="boy-arm-right"></div>
+                            <div class="boy-leg-left"></div>
+                            <div class="boy-leg-right"></div>
+                            <div class="boy-flower" id="boyFlower">🌹</div>
+                        </div>
+                    </div>
+
+                    <!-- ORANG LIDI PEREMPUAN (EZATUL) -->
+                    <div class="stickman-girl" id="stickmanGirl">
+                        <div class="girl-head"><span class="girl-bow">🎀</span><span class="girl-crown" id="girlCrown">👑</span></div>
+                        <div class="girl-body">
+                            <div class="girl-leg-left"></div>
+                            <div class="girl-leg-right"></div>
+                        </div>
+                    </div>
+
+                    <!-- BABY STICKMAN -->
+                    <div class="stickman-baby" id="stickmanBaby">👶🍼</div>
+
+                    <!-- HATI BURST -->
+                    <div class="love-heart-pop" id="loveHeartPop">💖</div>
+                </div>
+
+                <button class="replay-anim-btn" onclick="runFullStickmanTimeline()">Putar Semula Animasi 🔄</button>
+            </div>
+        </div>
+
+        <!-- WHATSAPP REPLY CARD (BAHAGIAN BALAS CHAT) -->
+        <div class="whatsapp-reply-card reveal">
+            <h3>Balasan Hatimu</h3>
+            <p>
+                Ezatul sayang, jika hati awak juga bersetuju dengan segala hajat dan niat ikhlas saya, sentuh butang di bawah untuk menghantar jawapan indahmu terus ke WhatsApp saya. 🌹
+            </p>
+            <!-- TUKARKAN 601XXXXXXXX DENGAN NOMBOR TELEFON WHATSAPP ANDA -->
+            <a id="waBtn" href="https://wa.me/60143370331?text=Saya%20pun%20nak%20kahwin%20dengan%20awak%2C%20sayang%20awak%20Iskandar%20%F0%9F%92%96" target="_blank" class="wa-reply-btn">
+                <span>💬</span> Balas Mesej Di WhatsApp
+            </a>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-heart">💖</div>
+            <div class="footer-text">Semoga Allah Memelihara Ikatan Kita</div>
+            <div class="footer-name">EZATUL NADIAH</div>
+            <p style="margin-top:20px; color:#8b5a6b; font-size:0.8rem;">
+                Dibuat dengan penuh keikhlasan &middot; 2026
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicToggle');
+        const musicGateModal = document.getElementById('musicGateModal');
+        let isPlaying = false;
+
+        // ===== OPENING ANIMATION & AUDIO CHECK =====
+        function openMain() {
+            const opening = document.getElementById('opening');
+            const main = document.getElementById('main-content');
+
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    createParticle(window.innerWidth/2, window.innerHeight/2, ['💖','🌸','✨','💕','🌹','💫']);
+                }, i * 50);
+            }
+
+            opening.classList.add('hidden');
+            setTimeout(() => {
+                main.classList.add('visible');
+                initFlowers();
+                startLoveProgressBar();
+                startTogetherTimer();
+
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    musicBtn.textContent = '🎵';
+                    unlockPageScroll();
+                }).catch(e => {
+                    console.log("Autoplay dihalang pelayar web, membuka popup audio:", e);
+                    musicGateModal.classList.add('active');
+                });
+            }, 500);
+        }
+
+        function playMusicAndUnlock() {
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                musicBtn.textContent = '🎵';
+                musicGateModal.classList.remove('active');
+                unlockPageScroll();
+            }).catch(err => {
+                console.error("Gagal memutarkan audio:", err);
+            });
+        }
+
+        function unlockPageScroll() { document.body.classList.remove('no-scroll'); }
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+                isPlaying = false;
+            } else {
+                bgMusic.play().then(() => {
+                    musicBtn.textContent = '🎵';
+                    isPlaying = true;
+                    unlockPageScroll();
+                });
+            }
+        }
+
+        // ===== HERO NAME ANIMATION =====
+        const name = "Ezatul Nadiah";
+        const heroNameEl = document.getElementById('heroName');
+        name.split('').forEach((char) => {
+            const span = document.createElement('span');
+            span.textContent = char === ' ' ? ' ' : char;
+            span.style.display = 'inline-block';
+            heroNameEl.appendChild(span);
+        });
+
+        // ===== CURRENT DATE =====
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = now.toLocaleDateString('ms-MY', options);
+
+        // ===== FLOATING FLOWERS =====
+        const flowerEmojis = ['🌸','🌺','🌹','🌷','💐','🍃'];
+
+        function initFlowers() {
+            const container = document.getElementById('flower-container');
+            for (let i = 0; i < 20; i++) { createFlower(container); }
+            setInterval(() => createFlower(container), 2000);
+        }
+
+        function createFlower(container) {
+            const flower = document.createElement('div');
+            flower.className = 'flower-petal';
+            flower.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.animationDuration = (Math.random() * 8 + 6) + 's';
+            flower.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            container.appendChild(flower);
+
+            setTimeout(() => flower.remove(), 15000);
+        }
+
+        function revealLove(card) {
+            if (!card.classList.contains('revealed')) {
+                card.classList.add('revealed');
+                const rect = card.getBoundingClientRect();
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        createParticle(rect.left + rect.width/2, rect.top + rect.height/2, ['❤️','💖','💕','✨','🌸']);
+                    }, i * 30);
+                }
+            }
+        }
+
+        // ===== TIMER SINCE 9 JANUARI 2026 =====
+        function startTogetherTimer() {
+            const startDate = new Date('2026-01-09T00:00:00');
+
+            function updateTimer() {
+                const now = new Date();
+                const diff = now - startDate;
+
+                if (diff > 0) {
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                    const minutes = Math.floor((diff / 1000 / 60) % 60);
+                    const seconds = Math.floor((diff / 1000) % 60);
+
+                    document.getElementById('days').textContent = days;
+                    document.getElementById('hours').textContent = hours;
+                    document.getElementById('minutes').textContent = minutes;
+                    document.getElementById('seconds').textContent = seconds;
+                }
+            }
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        // ===== UNLIMITED LOVE PROGRESS BAR ANIMATION =====
+        function startLoveProgressBar() {
+            const bar = document.getElementById('progressBar');
+            const text = document.getElementById('progressText');
+            let progress = 0;
+
+            const interval = setInterval(() => {
+                progress += 1;
+                if (progress <= 100) {
+                    bar.style.width = progress + '%';
+                    text.textContent = 'Cinta & Kesetiaan: ' + progress + '%';
+                } else if (progress > 100 && progress <= 999) {
+                    bar.style.width = '100%';
+                    text.textContent = 'Cinta Tanpa Had: ' + progress + '% ∞';
+                } else {
+                    text.textContent = 'Cinta Tanpa Had: UNLIMITED ∞ 💖';
+                    clearInterval(interval);
+                }
+            }, 30);
+        }
+
+        // ===== ANIMASI BUNGA MEKAR =====
+        function giveFlower() {
+            const modal = document.getElementById('flowerModal');
+            modal.classList.add('active');
+
+            const flowersArr = ['🌹','🌸','🌺','🌷','✨','💖'];
+            for (let i = 0; i < 60; i++) {
+                setTimeout(() => {
+                    const randomX = Math.random() * window.innerWidth;
+                    const randomY = Math.random() * window.innerHeight;
+                    createParticle(randomX, randomY, flowersArr);
+                }, i * 30);
+            }
+        }
+
+        function closeFlowerModal() { document.getElementById('flowerModal').classList.remove('active'); }
+
+        // ===== LOGIK ANIMASI ALUR CERITA ORANG LIDI =====
+        function openAndStartStickmanStory() {
+            const triggerBtn = document.getElementById('startAnimBtn');
+            const container = document.getElementById('stickmanStageContainer');
+            
+            triggerBtn.style.display = 'none';
+            container.classList.add('active');
+            
+            runFullStickmanTimeline();
+        }
+
+        function runFullStickmanTimeline() {
+            const boy = document.getElementById('stickmanBoy');
+            const girl = document.getElementById('stickmanGirl');
+            const flower = document.getElementById('boyFlower');
+            const heart = document.getElementById('loveHeartPop');
+            const shop = document.getElementById('flowerShop');
+            const pelamin = document.getElementById('pelaminDecor');
+            const house = document.getElementById('houseDecor');
+            const songkok = document.getElementById('boySongkok');
+            const crown = document.getElementById('girlCrown');
+            const baby = document.getElementById('stickmanBaby');
+            const badge = document.getElementById('sceneBadge');
+
+            // RESET ALL ELEMENTS
+            badge.textContent = "Babak 1: Hadiah Bunga Tulus";
+            shop.style.opacity = '1';
+            pelamin.style.opacity = '0';
+            house.style.opacity = '0';
+            
+            boy.style.transition = 'none';
+            boy.style.left = '5%';
+            girl.style.right = '12%';
+            
+            flower.style.opacity = '0';
+            heart.style.opacity = '0';
+            heart.style.transform = 'translateX(-50%) scale(0)';
+            songkok.style.opacity = '0';
+            crown.style.opacity = '0';
+            baby.style.opacity = '0';
+
+            // --- BABAK 1: BELI & SERAH BUNGA ---
+            setTimeout(() => {
+                boy.style.transition = 'left 2.5s linear';
+                boy.style.left = '32%';
+            }, 100);
+
+            // Beli bunga di kedai
+            setTimeout(() => { flower.style.opacity = '1'; }, 2600);
+
+            // Jalan ke Ezatul
+            setTimeout(() => {
+                boy.style.transition = 'left 3s linear';
+                boy.style.left = '65%';
+            }, 3100);
+
+            // Tiba & Serah Bunga + Pop Heart
+            setTimeout(() => {
+                heart.style.left = '72%';
+                heart.style.opacity = '1';
+                heart.style.transform = 'translateX(-50%) scale(1.2)';
+
+                const rect = heart.getBoundingClientRect();
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => { createParticle(rect.left + 10, rect.top + 10, ['💖','🌹','🌸','✨']); }, i * 50);
+                }
+            }, 6200);
+
+            // --- BABAK 2: DI ATAS PELAMIN (HARI HALAL) ---
+            setTimeout(() => {
+                badge.textContent = "Babak 2: Ijab & Qabul di Atas Pelamin 💒";
+                shop.style.opacity = '0';
+                pelamin.style.opacity = '1';
+                heart.style.opacity = '0';
+                flower.style.opacity = '0';
+
+                // Pakai busana pengantin
+                songkok.style.opacity = '1';
+                crown.style.opacity = '1';
+
+                // Duduk bersanding rapat di pelamin
+                boy.style.transition = 'left 1.5s ease';
+                boy.style.left = '42%';
+                
+                girl.style.transition = 'right 1.5s ease';
+                girl.style.right = '42%';
+            }, 8500);
+
+            // Hati besar gembira di pelamin
+            setTimeout(() => {
+                heart.style.left = '50%';
+                heart.style.opacity = '1';
+                heart.style.transform = 'translateX(-50%) scale(1.5)';
+                
+                for (let i = 0; i < 25; i++) {
+                    setTimeout(() => {
+                        const randomX = window.innerWidth / 2 + (Math.random() - 0.5) * 200;
+                        createParticle(randomX, window.innerHeight * 0.6, ['✨','💫','🤍','💍']);
+                    }, i * 40);
+                }
+            }, 10200);
+
+            // --- BABAK 3 & 4: SUAMI ISTERI & CAHAYA MATA ---
+            setTimeout(() => {
+                badge.textContent = "Babak 3 & 4: Bahagia Suami Isteri & Cahaya Mata 👶";
+                pelamin.style.opacity = '0';
+                house.style.opacity = '1';
+
+                // Posisi keluarga kecil
+                boy.style.left = '38%';
+                girl.style.right = '38%';
+            }, 13000);
+
+            // Kehadiran Baby
+            setTimeout(() => {
+                baby.style.opacity = '1';
+                heart.style.left = '50%';
+                heart.style.bottom = '110px';
+                heart.style.opacity = '1';
+                heart.style.transform = 'translateX(-50%) scale(1.3)';
+
+                for (let i = 0; i < 30; i++) {
+                    setTimeout(() => {
+                        const randomX = window.innerWidth / 2 + (Math.random() - 0.5) * 250;
+                        createParticle(randomX, window.innerHeight * 0.6, ['🌸','👶','💖','✨','🍃']);
+                    }, i * 50);
+                }
+            }, 14500);
+        }
+
+        // ===== PARTICLE SYSTEM =====
+        function createParticle(x, y, emojis) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.setProperty('--tx', (Math.random() - 0.5) * 300 + 'px');
+            particle.style.setProperty('--ty', (Math.random() - 0.5) * 300 - 100 + 'px');
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 1800);
+        }
+
+        // ===== SCROLL REVEAL =====
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>
